@@ -38,8 +38,6 @@ tweets.df$text<-gsub("RT ", "", tweets.df$text, ignore.case=FALSE)
 #clean_text function swiped from http://technokarak.com/how-to-clean-the-twitter-data-using-r-twitter-mining-tutorial.html
 clean_text = function(x)
 {
-      # x = gsub("\\brt\\w+ *", "", x) # remove Retweet
-      # x = gsub("/^RT ",  "", x, ignore.case = TRUE) # remove Retweet
       x = gsub("@\\w+ *", "", x) # remove at(@)
       x = gsub("[[:punct:]]", "", x) # remove punctuation
       x = gsub("[[:digit:]]", "", x) # remove numbers/Digits
