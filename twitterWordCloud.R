@@ -31,7 +31,7 @@ tweets <- searchTwitter(term, n = 300,
 tweets.df <- twListToDF(tweets)
 
 #start cleaning!
-#remove the RT at the beginning of retweets
+#remove the RT at the beginning of retweets. I found this to be particularly stubbon and finally decided to gsub it outside fo the clean_text function.
 tweets.df$text<-gsub("RT ", "", tweets.df$text, ignore.case=FALSE)
 
 
