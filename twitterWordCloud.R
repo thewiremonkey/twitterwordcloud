@@ -118,10 +118,6 @@ t_corp <- tm_map(t_corp, function(x)
 # dev.off()
 
 
-
-
-
-
 #I like to save the wordcloud down to a png file using cairo, it produces a nice clean image.  Wrap png() and dev.off() around your wordcloud code.
 png(
       filename = paste0(rn, term, ".png", collapse = ""),
