@@ -89,6 +89,39 @@ t_corp <- tm_map(t_corp, function(x)
 t_corp <- tm_map(t_corp, function(x)
       removeWords(x, c(hashremove)))
 
+#if you want, you can process the text even more and create a document term matrix which is useful if you want to create bar charts or other types of visualizations, but it is not necessary to create a word cloud. The following commented out code is swiped from 
+#https://www.r-bloggers.com/text-mining-and-word-cloud-fundamentals-in-r-5-simple-steps-you-should-know/
+#
+#dtm <- TermDocumentMatrix(t_corp)
+# m <- as.matrix(dtm)
+# v <- sort(rowSums(m),decreasing=TRUE)
+# d <- data.frame(word = names(v),freq=v)
+# head(d, 10)
+
+# png(
+#       filename = paste0(rn, term, ".png", collapse = ""),
+#       type = "cairo",
+#       res = 300,
+#       width = 5,
+#       height = 5,
+#       units = "in"
+# )
+# 
+# #the magic via the wordcloud package
+# xcloud <-
+#       wordcloud(words = d$word,
+#                 freq=d$freq,
+#                 max.words = 100,
+#                 rot.per = 0.3,
+#                 color = colors)
+# 
+# dev.off()
+
+
+
+
+
+
 #I like to save the wordcloud down to a png file using cairo, it produces a nice clean image.  Wrap png() and dev.off() around your wordcloud code.
 png(
       filename = paste0(rn, term, ".png", collapse = ""),
