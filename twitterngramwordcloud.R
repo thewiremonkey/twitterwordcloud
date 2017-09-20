@@ -10,7 +10,7 @@ library("dplyr")
 library("rJava")
 
 options(mc.cores=2)
-if(getwd()!="C:/Users/Marketing/Documents/twitter"){setwd("C:/Users/Marketing/Documents/twitter")}
+
 #set the search term.  If you are using more than one, either add a plus sign (+) between them or put them in a list c("term1", "term2")
 term <- "unga"
 
@@ -19,10 +19,10 @@ colors <- c("blue", "red", "gold", "lightslategrey")
 
 #set authorization tokens for twitter api 
 #go to dev.twitter.com to create an app and get authorization codes.
-setup_twitter_oauth(consumer_key = "sAjD0s4T5415LZQ7LSiLsvWJS",
-                    consumer_secret = 	"bxUxU1u7uRuO7Ao5H6tkFiPO2lMI960p79trQCGPriKd4HEsqW",
-                    access_token = "15231924-OA0BMnK6Vs1xpTgP99N9IAuM52o5XBTmUypw4Sgxm",
-                    access_secret = "VA7vEj3fm5yyGa7XkMBQn9ptAWwCwfuK5XH6LOMJ4R74N"
+setup_twitter_oauth(consumer_key = "",
+                    consumer_secret = 	"",
+                    access_token = "",
+                    access_secret = ""
 )
 
 #run the search using the term. Twitter rate limits, but it is sometimes possible to push the n number.  This can take a while, be patient.
@@ -73,6 +73,7 @@ clean_text = function(x)
 }
 
 tweets.df$text <- clean_text(tweets.df$text)
+#change ampersands, which have been changed to "amp" to the word "and"
 tweets.df$text<-gsub(" amp ", " and ", tweets.df$text)
 
 term<-clean_text(term)
