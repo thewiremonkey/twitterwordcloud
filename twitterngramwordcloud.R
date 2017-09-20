@@ -73,6 +73,8 @@ clean_text = function(x)
 }
 
 tweets.df$text <- clean_text(tweets.df$text)
+tweets.df$text<-gsub(" amp ", " and ", tweets.df$text)
+
 term<-clean_text(term)
 
 #If I'm running a key word several times I generate a random number, rn, so that my data doesn't get overwritten.
@@ -163,14 +165,10 @@ b_corp <- tm_map(b_corp, function(x)
 BigramTokenizer <- function(x) NGramTokenizer(x, RWeka::Weka_control(min=2, max=2))
 
 bi_TDM <- TermDocumentMatrix(b_corp, control=list(tokenize=BigramTokenizer))
-# bdtm <- TermDocumentMatrix(b_corp, control=list(tokenize=BigramTokenizer))
-# bm <- as.matrix(bdtm)
-# bv <- sort(rowSums(m),decreasing=TRUE)
-# bd <- data.frame(word = names(v),freq=v)
-
-freq = sort(rowSums(as.matrix(bi_TDM)),decreasing = TRUE)
-freq.df = data.frame(word=names(freq), freq=freq)
-head(freq.df, 20)
+bm<-as.matrix(bi_TDM)
+bv = sort(rowSums(bm),decreasing = TRUE)
+bd = data.frame(word=names(bv), freq=bv)
+head(bd, 20)
 
 #create trigram corpus
 
@@ -184,10 +182,11 @@ tri_corp <- tm_map(tri_corp, function(x)
 TrigramTokenizer <- function(x) NGramTokenizer(x, RWeka::Weka_control(min=3, max=3))
 
 tri_TDM <- TermDocumentMatrix(tri_corp, control=list(tokenize=TrigramTokenizer))
+trm<-as.matrix(tri_TDM)
+trv = sort(rowSums(trm),decreasing = TRUE)
+trd = data.frame(word=names(trv), freq=trv)
+head(trd, 20)
 
-trifreq = sort(rowSums(as.matrix(tri_TDM)),decreasing = TRUE)
-trifreq.df = data.frame(word=names(trifreq), freq=trifreq)
-head(trifreq.df, 20)
 
 png(
   filename = paste0(rn, term, "bi.png", collapse = ""),
@@ -197,7 +196,7 @@ png(
   height = 5,
   units = "in"
 )
-bicloud<-wordcloud(words=freq.df$word, freq=freq.df$freq,
+bicloud<-wordcloud(words=bd$word, freq=bd$freq,
           max.words = 100, #how many words you want to include
           scale=c(4, .2),
           rot.per = 0.3, #what percent you want to be rotated. in this case, 30%
@@ -215,9 +214,9 @@ png(
   height = 5,
   units = "in"
 )
-tricloud<-wordcloud(words=trifreq.df$word, freq=trifreq.df$freq,
-                    max.words = 100, #how many words you want to include
-                    scale=c(4, .2),
+tricloud<-wordcloud(words=trd$word, freq=trd$freq,
+                    max.words = 75, #how many words you want to include
+                    scale=c(4, .1),
                     rot.per = 0.3, #what percent you want to be rotated. in this case, 30%
                     color = colors)#use the colors set at the top of the script or leave blank.)
 
