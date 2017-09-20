@@ -13,6 +13,3 @@ https://dev.twitter.com/
 
 ## This is probably where I got started:  
 https://www.r-bloggers.com/text-mining-and-word-cloud-fundamentals-in-r-5-simple-steps-you-should-know/
-
-## Snagged the fix for my n-grams here (freq, freq.df):
-https://rstudio-pubs-static.s3.amazonaws.com/118348_a00ba585d2314b3c937d6acd4f4698b0.html
